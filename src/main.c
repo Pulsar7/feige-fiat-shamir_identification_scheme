@@ -18,6 +18,7 @@ int main(int argc, const char** argv) {
     // Generate key-pair
     ZKPParameters zkp_params;
     zkp_params.n = n;
+    zkp_params.rounds_amount = rounds;
     KeyPair key_pair;
     if (!generate_keypair(&key_pair, &zkp_params)) {
         LOG_ERROR("Couldn't generate key-pair.");
@@ -30,8 +31,8 @@ int main(int argc, const char** argv) {
     );
 
     // Prover generates rounds.
-    ZKPRoundData proof[rounds];
-    if (!generate_proof(&zkp_params, &(key_pair.private_key), proof, rounds)) {
+    ZKPRoundData proof[zkp_params.rounds_amount];
+    if (!generate_proof(&zkp_params, &(key_pair.private_key), proof)) {
         LOG_ERROR("Couldn't generate proof!");
         return 1;
     }
@@ -39,7 +40,7 @@ int main(int argc, const char** argv) {
     LOG_INFO("Generated proof.");
 
     // Verifier verifies all rounds.
-    if (!verify_proof(&zkp_params, &(key_pair.public_key), proof, rounds)) {
+    if (!verify_proof(&zkp_params, &(key_pair.public_key), proof)) {
         LOG_ERROR("Couldn't verify proof!");
         return 1;
     }

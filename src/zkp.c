@@ -28,8 +28,8 @@ bool generate_proof_round(ZKPParameters* zkp_parameters, PrivateKey* private_key
 }
 
 // Generate whole proof for the proover.
-bool generate_proof(ZKPParameters* zkp_parameters, PrivateKey* private_key, ZKPRoundData* rounds, unsigned int rounds_amount) {
-    for (size_t i = 0; i < rounds_amount; i++) {
+bool generate_proof(ZKPParameters* zkp_parameters, PrivateKey* private_key, ZKPRoundData* rounds) {
+    for (size_t i = 0; i < zkp_parameters->rounds_amount; i++) {
         if (!generate_proof_round(zkp_parameters, private_key, &rounds[i])) {
             LOG_ERROR("Couldn't generate proof for round %zu", i);
             return false;
@@ -69,8 +69,8 @@ bool verify_round(ZKPParameters* zkp_parameters, PublicKey* public_key, ZKPRound
 }
 
 // Verifies the whole authentication proof (multiple rounds).
-bool verify_proof(ZKPParameters* zkp_parameters, PublicKey* public_key, ZKPRoundData* rounds, unsigned int rounds_amount) {
-    for (size_t i = 0; i < rounds_amount; i++) {
+bool verify_proof(ZKPParameters* zkp_parameters, PublicKey* public_key, ZKPRoundData* rounds) {
+    for (size_t i = 0; i < zkp_parameters->rounds_amount; i++) {
         if (!verify_round(zkp_parameters, public_key, &rounds[i])) {
             LOG_ERROR("Couldn't verify proof for round %zu", i);
             return false;
