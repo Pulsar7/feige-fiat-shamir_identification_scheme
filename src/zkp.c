@@ -1,5 +1,11 @@
 #include "zkp.h"
 
+// Simulating, that the verifier sends the prover the challenge.
+Challenge get_challenge_from_verifier() {
+    // For learning purposes.
+    return rand() % 2;
+}
+
 // Generate round-proof for the proover.
 bool generate_proof_round(ZKPParameters* zkp_parameters, PrivateKey* private_key, ZKPRoundData* round_data) {
     // Step 1: Choose random r in [1, n-1]
@@ -9,7 +15,7 @@ bool generate_proof_round(ZKPParameters* zkp_parameters, PrivateKey* private_key
     round_data->x = (round_data->r * round_data->r) % zkp_parameters->n;
 
     // Step 3: Generate random challenge e (0 or 1)
-    round_data->challenge = rand() % 2;
+    round_data->challenge = get_challenge_from_verifier();
 
     // Step 4: Compute response y
     if (round_data->challenge == 0) {
