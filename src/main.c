@@ -2,8 +2,12 @@
 
 int main(int argc, const char** argv) {
     unsigned long long int n = DEFAULT_MODULUS;
-    if (argc == 2) {
+    unsigned int rounds = DEFAULT_ROUNDS;
+    if (argc >= 2) {
         n = strtoull(argv[1], NULL, 10);
+        if (argc == 3) {
+            rounds = strtoul(argv[2], NULL, 5);
+        }
     }
 
     // Set seed for pseudorandom-number-selection.
@@ -18,10 +22,28 @@ int main(int argc, const char** argv) {
         return 1;
     }
 
-    LOG_DEBUG("Generated private-key: %lld | public-key: %lld", 
+    LOG_DEBUG("Generated private-key: %lld | public-key: %lld",
         key_pair.private_key.key,
         key_pair.public_key.key
     );
+
+    // Prover generates rounds.
+    ZKPRoundData proof[rounds];
+    if (!generate_proof(&zkp_params, &(key_pair.private_key), proof, rounds)) {
+        LOG_ERROR("Couldn't generate proof!");
+        return 1;
+    }
+
+    LOG_INFO("Generated proof.");
+
+    // Verifier verifies all rounds.
+    if (!verify_proof(&zkp_params, &(key_pair.public_key), proof, rounds)) {
+        LOG_ERROR("Couldn't verify proof!");
+        return 1;
+    }
+
+    LOG_INFO("Verified proof!");
+
 
     return 0; // OK
 }

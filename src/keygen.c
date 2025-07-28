@@ -12,7 +12,7 @@ unsigned long long int gcd(unsigned long long int a, unsigned long long int b) {
 // Generate the private key.
 bool generate_private_key(PrivateKey* private_key, const ZKPParameters* zkp_parameters) {
     if (zkp_parameters->n < 3) {
-        LOG_ERROR("The given modulus '%d' is too small!", zkp_parameters->n);
+        LOG_ERROR("The given modulus '%lld' is too small!", zkp_parameters->n);
         return false;
     }
     
@@ -58,5 +58,7 @@ bool generate_keypair(KeyPair* key_pair, ZKPParameters* zkp_parameters) {
 
     LOG_DEBUG("Generated key-pair.");
     
+    
+
     return true;
 }
