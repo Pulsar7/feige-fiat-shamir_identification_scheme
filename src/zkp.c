@@ -44,31 +44,32 @@ bool generate_proof(ZKPParameters* zkp_parameters, PrivateKey* private_key, ZKPR
 
 // Verifies a single challenge-response.
 bool verify_round(ZKPParameters* zkp_parameters, PublicKey* public_key, ZKPRoundData* round_data) {
-    // Left-hand side of the equation
-    unsigned long long lhs = (round_data->y * round_data->y) % zkp_parameters->n;
-
-    //
-    if (round_data->challenge == ZERO) {
-        // Prover claims y = r → check y^2 ≡ x mod n
-        return lhs == round_data->x;
-    }
-
-    // Prover claims y = r * s → check y^2 ≡ x * v mod n
-    // Right-hand side of the equation
-    unsigned long long rhs = (round_data->x * public_key->key) % zkp_parameters->n;
-    
-    return lhs == rhs;
-}
-
-// Verifies the whole authentication proof (multiple rounds).
-bool verify_proof(ZKPParameters* zkp_parameters, PublicKey* public_key, ZKPRoundData* rounds, unsigned int rounds_amount) {
     /*
         1. The prover sends a commitment (x)
         2. The verifier sends a random challenge (e)
         3. The prover responds with a value (y)
-        4. The verifier checks if y is valid (using `verify_round`)
+        4. The verifier checks if y is valid
     */
 
+    // Left-hand side of the equation
+    unsigned long long lhs = (round_data->y * round_data->y) % zkp_parameters->n;
+
+    if (round_data->challenge == ZERO) {
+        // Verifier's challenge is ZERO
+        // Prover claims y = r → check y^2 ≡ x mod n
+        return lhs == round_data->x;
+    } else {
+        // Verifier's challenge is ONE
+        // Prover claims y = r * s → check y^2 ≡ x * v mod n
+        // Right-hand side of the equation
+        unsigned long long rhs = (round_data->x * public_key->key) % zkp_parameters->n;
+        
+        return lhs == rhs;
+    }
+}
+
+// Verifies the whole authentication proof (multiple rounds).
+bool verify_proof(ZKPParameters* zkp_parameters, PublicKey* public_key, ZKPRoundData* rounds, unsigned int rounds_amount) {
     for (size_t i = 0; i < rounds_amount; i++) {
         if (!verify_round(zkp_parameters, public_key, &rounds[i])) {
             LOG_ERROR("Couldn't verify proof for round %zu", i);
