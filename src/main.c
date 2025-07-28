@@ -6,9 +6,11 @@ int main(int argc, const char** argv) {
     if (argc >= 2) {
         n = strtoull(argv[1], NULL, 10);
         if (argc == 3) {
-            rounds = strtoul(argv[2], NULL, 5);
+            rounds = strtoul(argv[2], NULL, 10);
         }
     }
+
+    LOG_DEBUG("MODULUS=%lld | ROUNDS=%d", n, rounds);
 
     // Set seed for pseudorandom-number-selection.
     srand(time(NULL));
