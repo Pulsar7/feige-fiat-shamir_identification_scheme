@@ -16,7 +16,7 @@ typedef struct ZKPRoundData {
     unsigned long long int y;    // Response: y = r or r*s mod n
 } ZKPRoundData;
 
-bool generate_proof(ZKPParameters*, PrivateKey*, ZKPRoundData*, unsigned int);
-bool verify_proof(ZKPParameters*, PublicKey*, ZKPRoundData*, unsigned int);
+bool generate_proof(ZKPParameters* zkp_parameters, PrivateKey* private_key, ZKPRoundData* rounds, unsigned int rounds_amount);
+bool verify_proof(ZKPParameters* zkp_parameters, PublicKey* public_key, ZKPRoundData* rounds, unsigned int rounds_amount);
 
 #endif // FIS_ID_SCHEME_ZKP_H
