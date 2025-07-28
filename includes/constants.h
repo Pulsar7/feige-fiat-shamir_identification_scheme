@@ -20,8 +20,8 @@ typedef struct KeyPair {
 } KeyPair;
 
 typedef struct ZKPParameters {
-    unsigned long long int n; // modulus
-    unsigned int rounds_amount;      // number of challenge rounds (security parameter)
+    unsigned long long int n;   // modulus
+    unsigned int rounds_amount; // number of challenge rounds (security parameter)
 } ZKPParameters;
 
 #endif // FFS_ID_SCHEME_CONSTANTS_H
