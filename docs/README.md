@@ -20,5 +20,5 @@ Both default values are defined in the `constants.h` header file.
 You can override these values when running the program:
 
 ```bash
-./build/s_id_scheme/feige_fiat_shamir_id_scheme [modulus] [rounds]
+./build/feige_fiat_shamir_id_scheme [modulus] [rounds]
 ```
