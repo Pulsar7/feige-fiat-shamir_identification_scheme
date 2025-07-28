@@ -1,5 +1,5 @@
-#ifndef FIS_ID_SCHEME_LOGGING_H
-#define FIS_ID_SCHEME_LOGGING_H
+#ifndef FFS_ID_SCHEME_LOGGING_H
+#define FFS_ID_SCHEME_LOGGING_H
 
 #include <stdio.h>
 
@@ -9,4 +9,4 @@
     do { if (DEBUG) fprintf(stdout, "DEBUG: " fmt "\n", ##__VA_ARGS__); } while(0)
 
 
-#endif // FIS_ID_SCHEME_LOGGING_H
+#endif // FFS_ID_SCHEME_LOGGING_H

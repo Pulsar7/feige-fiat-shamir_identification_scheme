@@ -1,5 +1,5 @@
-#ifndef FIS_ID_SCHEME_CONSTANTS_H
-#define FIS_ID_SCHEME_CONSTANTS_H
+#ifndef FFS_ID_SCHEME_CONSTANTS_H
+#define FFS_ID_SCHEME_CONSTANTS_H
 #define DEBUG 1
 #define DEFAULT_MODULUS 3233
 #define DEFAULT_ROUNDS 10
@@ -23,4 +23,4 @@ typedef struct ZKPParameters {
     unsigned long long int n; // modulus
 } ZKPParameters;
 
-#endif // FIS_ID_SCHEME_CONSTANTS_H
+#endif // FFS_ID_SCHEME_CONSTANTS_H

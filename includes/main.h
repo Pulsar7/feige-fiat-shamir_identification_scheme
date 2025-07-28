@@ -1,5 +1,5 @@
-#ifndef FIS_ID_SCHEME_MAIN_H
-#define FIS_ID_SCHEME_MAIN_H
+#ifndef FFS_ID_SCHEME_MAIN_H
+#define FFS_ID_SCHEME_MAIN_H
 
 #include "constants.h"
 #include "logging.h"
@@ -9,4 +9,4 @@
 #include <time.h>
 
 
-#endif // FIS_ID_SCHEME_MAIN_H
+#endif // FFS_ID_SCHEME_MAIN_H

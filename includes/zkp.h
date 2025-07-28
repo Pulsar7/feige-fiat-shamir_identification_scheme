@@ -1,5 +1,5 @@
-#ifndef FIS_ID_SCHEME_ZKP_H
-#define FIS_ID_SCHEME_ZKP_H
+#ifndef FFS_ID_SCHEME_ZKP_H
+#define FFS_ID_SCHEME_ZKP_H
 
 #include "keygen.h"
 #include "constants.h"
@@ -19,4 +19,4 @@ typedef struct ZKPRoundData {
 bool generate_proof(ZKPParameters* zkp_parameters, PrivateKey* private_key, ZKPRoundData* rounds, unsigned int rounds_amount);
 bool verify_proof(ZKPParameters* zkp_parameters, PublicKey* public_key, ZKPRoundData* rounds, unsigned int rounds_amount);
 
-#endif // FIS_ID_SCHEME_ZKP_H
+#endif // FFS_ID_SCHEME_ZKP_H
