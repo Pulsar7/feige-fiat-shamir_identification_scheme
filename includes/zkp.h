@@ -3,6 +3,7 @@
 
 #include "keygen.h"
 #include "constants.h"
+#include <stdlib.h>
 
 typedef enum Challenge {
     ZERO = 0,

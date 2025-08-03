@@ -4,6 +4,7 @@
 #include "zkp.h"
 #include "logging.h"
 #include "constants.h"
+#include <stdlib.h>
 
 bool generate_keypair(KeyPair* key_pair, ZKPParameters* zkp_parameters);
 
